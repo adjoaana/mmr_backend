@@ -1,0 +1,45 @@
+{
+    "name": "physio-api",
+    "version": "1.0.0",
+    "description": "API for online physiotherapy app and web ",
+    "main": "index.js",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "set NODE_ENV=dev&& nodemon app.js",
+        "test": "jest --testTimeout=15000"
+    },
+    "author": "Nafiu Lawal",
+    "license": "UNLICENSED",
+    "dependencies": {
+        "@date-io/date-fns": "^1.3.13",
+        "aws-sdk": "^2.1180.0",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "cron": "^2.2.0",
+        "date-fns": "^2.23.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-validator": "^6.14.0",
+        "joi": "^17.4.0",
+        "jsonwebtoken": "^9.0.0",
+        "lodash": "^4.17.21",
+        "moment": "^2.29.1",
+        "moment-timezone": "^0.5.34",
+        "mongoose": "^6.4.3",
+        "morgan": "^1.10.0",
+        "multer": "^1.4.5-lts.1",
+        "node-crypt": "^1.2.0",
+        "node-fetch": "^3.2.10",
+        "node-schedule": "^2.0.0",
+        "nodemailer": "^6.7.7",
+        "nodemon": "^2.0.7",
+        "serverless-http": "^3.2.0"
+    },
+    "devDependencies": {
+        "jest": "^28.1.0",
+        "jwa": "^2.0.0",
+        "mongodb-memory-server": "^8.9.3",
+        "supertest": "^6.2.4"
+    }
+}

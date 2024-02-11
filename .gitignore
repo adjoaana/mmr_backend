@@ -1,0 +1,26 @@
+# dependencies
+/node_modules
+package.json.lock
+yarn.lock
+/uploads/audio/*
+!/uploads/audio/.l
+/uploads/videos/*
+!/uploads/videos/.l
+/uploads/images/*
+!/uploads/images/.l
+/.pnp
+.pnp.js
+
+log
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+.env-production

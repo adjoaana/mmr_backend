@@ -1,0 +1,4747 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is a great resource for using endpoints of the monitorMyRehab API. We use a general swagger UI for all endpoints. Completed routes doc - users, admins, appointment, healthprofessionalTypes, sessions",
+    "version" : "1.0.0",
+    "title" : "MonitorMyRehab API",
+    "termsOfService" : "https://monitormyrehab.com/terms/",
+    "contact" : {
+      "email" : "info@monitormyrehab.com"
+    },
+    "license" : {
+      "name" : "UNLICENSED",
+      "url" : "https://monitormyrehab.com/privacy/"
+    }
+  },
+  "host" : "api.mmr-meet.click",
+  "basePath" : "/api/",
+  "tags" : [ {
+    "name" : "admins",
+    "description" : "All admins endpoint"
+  }, {
+    "name" : "appointments",
+    "description" : "All appointments endpoint"
+  }, {
+    "name" : "sessions",
+    "description" : "All sessions endpoint"
+  }, {
+    "name" : "payments",
+    "description" : "All payments endpoint"
+  }, {
+    "name" : "users",
+    "description" : "All users endpoints"
+  }, {
+    "name" : "healthprofessionalTypes",
+    "description" : "All healthprofessionalTypes endpoints"
+  }, {
+    "name" : "exercises",
+    "description" : "All exercises endpoints"
+  }, {
+    "name" : "templates",
+    "description" : "All templates endpoints"
+  }],
+  "schemes" : [ "http", "https" ],
+  "paths" : {
+    "/admins/login/" : {
+      "post" : {
+        "tags" : [ "admins" ],
+        "summary" : "Login with admin details",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Created user object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/LoginDetails"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/LoginResponse"
+            }
+          }
+        }
+      }
+    },
+    "/admins/create/" : {
+      "post" : {
+        "tags" : [ "admins" ],
+        "summary" : "Register an admin",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Created user object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdminCreateDetails"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "201" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/admins/{id}" : {
+      "get" : {
+        "tags" : [ "admins" ],
+        "summary" : "Get one admin by id",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the user to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "admins" ],
+        "summary" : "Update admin by id",
+        "description" : "Update admin details",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID of the user to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Created admin object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdminUpdateDetails"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "admins" ],
+        "summary" : "Delete admin by id details",
+        "description" : "",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an authorization header",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the user to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/admins/" : {
+      "get" : {
+        "tags" : [ "admins" ],
+        "summary" : "Get all admins",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/admins/paginate" : {
+      "get" : {
+        "tags" : [ "admins" ],
+        "summary" : "Get paginated admins",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/admins/count" : {
+      "get" : {
+        "tags" : [ "admins" ],
+        "summary" : "Get all admins count",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/users/login/" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Login with user's details",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Created user object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/LoginDetails"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/LoginResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/register/" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Register an user",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Created user object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/RegisterDetails"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "201" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/users/" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Get all users",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "role",
+          "in" : "query",
+          "description" : "user's role (ind, pro, org or clinic)",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Add user",
+        "description" : "Add user",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Add user object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AddUser"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/users/paginate" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Get paginated users",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "role",
+          "in" : "query",
+          "description" : "user's role (ind, pro, org or clinic)",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/users/count" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Get all users count",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Get one user by id",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the user to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "users" ],
+        "summary" : "Update user by id",
+        "description" : "Update user details",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the user to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Created user object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AddUser"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "users" ],
+        "summary" : "Delete user with id",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the user to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/users/paginate/" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Get all users in pagination mode",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/users/users/" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Get all healthprofessional's users",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an healthprofessional authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Add healthprofessional user",
+        "description" : "Add healthprofessional user",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an healthprofessional authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Add user object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AddUser"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/users/users/paginate" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Get paginated users",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an health professional authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/users/users/count" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Get all healthprofessional's users count",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an healthprofessional authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/users/users/paginate/" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Get all healthprofessional's users in pagination mode",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an healthprofessional authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/users/users/{id}" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Get health professional's user with id",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an healthprofessional authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the user to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "users" ],
+        "summary" : "Update user by id",
+        "description" : "Update user details",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an healthprofessional authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the user to get",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Created user object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AddUser"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "users" ],
+        "summary" : "Delete health professional's user with id",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an healthprofessional authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the user to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/appointments" : {
+      "get" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Get all appointments - admin access.",
+        "description" : "This endpoint returns all appointments in the system. We encourage you to use the pagination endpoint for appointments. You will need admin access for this endpoint.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Create an appointment",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AppointmentCreate"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/appointments/paginate" : {
+      "get" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Get paginated appointments - admin access.",
+        "description" : "This endpoint returns all appointments in the system. We encourage you to use the pagination endpoint for appointments.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "/appointments/{id}" : {
+      "get" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Get all appointments - admin access.",
+        "description" : "This endpoint returns all appointments in the system to user. We encourage you to use the pagination endpoint for appointments. You will need admin access for this endpoint.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the appointment",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentGet"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Update an appointment",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the appointment to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AppointmentUpdate"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Update an appointment",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the appointment to delete",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/appointments/{id}/approve" : {
+      "put" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Approve an appointment by admin",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the appointment",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "create_session",
+          "in" : "query",
+          "description" : "create a session with appointment details.",
+          "required" : true,
+          "type" : "boolean",
+          "default" : false
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "type" : "object",
+            "properties" : {
+              "healthProfessional_id" : {
+                "type" : "string",
+                "description" : "assigned health profession id"
+              }
+            }
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/appointments/{id}/decline" : {
+      "put" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Approve an appointment by admin",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the user to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/appointments/count" : {
+      "get" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Count all appointments.",
+        "description" : "This endpoint returns data containing the count of all appointments.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsCountError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsCount"
+            }
+          }
+        }
+      }
+    },
+    "/appointments/users" : {
+      "get" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Get all user appointments - health professional access.",
+        "description" : "This endpoint returns all appointments in the system. We encourage you to use the pagination endpoint for appointments.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Create a user appointment",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AppointmentCreate"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/appointments/users/paginate" : {
+      "get" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Get paginated user appointments - admin access.",
+        "description" : "This endpoint returns all user appointments in the system. We encourage you to use the pagination endpoint for appointments.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "/appointments/users/{id}" : {
+      "get" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Get all appointments - admin access.",
+        "description" : "This endpoint returns all user appointments in the system to user. We encourage you to use the pagination endpoint for appointments.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the appointment",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentGet"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Update an appointment",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the appointment",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AppointmentUpdate"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Update an appointment",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the appointment",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/appointments/users/{id}/approve" : {
+      "put" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Approve an appointment by healthprofessional",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a healthprofessional authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the appointment",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/appointments/users/{id}/decline" : {
+      "put" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Approve an appointment by healthprofessional",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a healthprofessional authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the appointment",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/appointments/users/count" : {
+      "get" : {
+        "tags" : [ "appointments" ],
+        "summary" : "Count all appointments.",
+        "description" : "This endpoint returns data containing the count of all user appointments.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsCountError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsCount"
+            }
+          }
+        }
+      }
+    },
+    "/healthprofessionalTypes/" : {
+      "get" : {
+        "tags" : [ "healthprofessionalTypes" ],
+        "summary" : "Get all healthprofessionalTypes",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "healthprofessionalTypes" ],
+        "summary" : "Add healthprofessionalType",
+        "description" : "Add healthprofessionalType",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Add healthprofessionalTypes object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/healthprofessionalType"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/healthprofessionalTypes/paginate" : {
+      "get" : {
+        "tags" : [ "healthprofessionalTypes" ],
+        "summary" : "Get paginated healthprofessionalTypes",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "/healthprofessionalTypes/count" : {
+      "get" : {
+        "tags" : [ "healthprofessionalTypes" ],
+        "summary" : "Get all healthprofessionalTypes count",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "/healthprofessionalTypes/{id}" : {
+      "get" : {
+        "tags" : [ "healthprofessionalTypes" ],
+        "summary" : "Get one healthprofessionalType by id",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the healthprofessionalType to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "healthprofessionalTypes" ],
+        "summary" : "Update healthprofessionalType by id",
+        "description" : "Update healthprofessionalType details",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the healthprofessionalType to get",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Created user object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AddUser"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "healthprofessionalTypes" ],
+        "summary" : "Delete healthprofessionalType with id",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the healthprofessionalType to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/sessions" : {
+      "get" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Get all sessions - admin access.",
+        "description" : "This endpoint returns all sessions in the system. We encourage you to use the pagination endpoint for sessions. You will need admin access for this endpoint.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Create a session",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Session"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/paginate" : {
+      "get" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Get paginated sessions - admin access.",
+        "description" : "This endpoint returns all sessions in the system. We encourage you to use the pagination endpoint for sessions.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/{id}" : {
+      "get" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Get all sessions - admin access.",
+        "description" : "This endpoint returns all sessions in the system to user. We encourage you to use the pagination endpoint for sessions. You will need admin access for this endpoint.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the session to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentGet"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Update an sessions",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the session to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Session"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Delete an appointment",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the session to delete",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/count" : {
+      "get" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Count all sessions.",
+        "description" : "This endpoint returns data containing the count of all sessions.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsCountError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsCount"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/past" : {
+      "get" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Count all past sessions.",
+        "description" : "This endpoint returns data containing the count of all past sessions.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsCountError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/upcoming" : {
+      "get" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Count all upcoming sessions.",
+        "description" : "This endpoint returns data containing the count of all upcoming sessions.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsCountError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/users" : {
+      "get" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Get all sessions",
+        "description" : "This endpoint returns all sessions in the system. We encourage you to use the pagination endpoint for sessions. You will need admin access for this endpoint.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Create a session",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a healthprofessional authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Session"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/users/paginate" : {
+      "get" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Get paginated sessions.",
+        "description" : "This endpoint returns all sessions in the system. We encourage you to use the pagination endpoint for sessions.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/users/{id}" : {
+      "get" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Get all sessions.",
+        "description" : "This endpoint returns all sessions in the system to user. We encourage you to use the pagination endpoint for sessions.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the session to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentGet"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Update a user sessions",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the session to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Session"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Delete a user appointment",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the session to delete",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/users/{id}/diagnosis" : {
+      "put" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Update a user sessions",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a health professional's authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the session to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Diagnosis"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/users/{id}/exercise" : {
+      "put" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Add an exercise to session",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a health professional's authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the session to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SessionExercise"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/users/{id}/exercises" : {
+      "put" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Add an exercise to session",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a health professional's authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the session to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/SessionExercise"
+            }
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/users/count" : {
+      "get" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Count all sessions.",
+        "description" : "This endpoint returns data containing the count of all user sessions.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsCountError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsCount"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/user/past" : {
+      "get" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Count all user past sessions.",
+        "description" : "This endpoint returns data containing the count of all past sessions.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsCountError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/user/upcoming" : {
+      "get" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Count all upcoming sessions.",
+        "description" : "This endpoint returns data containing the count of all upcoming sessions.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/AppointmentsCountError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "/exercises/" : {
+      "get" : {
+        "tags" : [ "exercises" ],
+        "summary" : "Get all exercises",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "exercises" ],
+        "summary" : "Add exercise",
+        "description" : "Add exercise",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "formData",
+          "description" : "title of exercise",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "description",
+          "in" : "formData",
+          "description" : "description of exercise",
+          "required" : true,
+          "type" : "file"
+        }, {
+          "name" : "video",
+          "in" : "formData",
+          "description" : "video to upload",
+          "required" : true,
+          "type" : "file"
+        }, {
+          "name" : "image",
+          "in" : "formData",
+          "description" : "image to upload",
+          "required" : true,
+          "type" : "file"
+        }, {
+          "name" : "audio",
+          "in" : "formData",
+          "description" : "audio to upload",
+          "required" : true,
+          "type" : "file"
+        }, {
+          "name" : "thumbImage",
+          "in" : "formData",
+          "description" : "thumbImage to upload",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/exercises/paginate" : {
+      "get" : {
+        "tags" : [ "exercises" ],
+        "summary" : "Get paginated exercises",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "/exercises/count" : {
+      "get" : {
+        "tags" : [ "exercises" ],
+        "summary" : "Get all exercises count",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "/exercises/{id}" : {
+      "get" : {
+        "tags" : [ "exercises" ],
+        "summary" : "Get one exercise by id",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the exercises to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "exercises" ],
+        "summary" : "Update exercise by id",
+        "description" : "Update exercises details",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the exercise to get",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Updated exercise object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AddUser"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "exercises" ],
+        "summary" : "Delete exercise with id",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the exercise to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/templates": {
+    "get" : {
+      "tags": [ "templates" ],
+      "summary" : "Get all templates",
+      "description": "This endpoint returns all sessions in the system. We encourage you to use the pagination endpoint for sessions. You will need healthprofessional access for this endpoint.",
+      "consumes" : [ "application/json" ],
+      "produces" : [ "application/json" ],
+      "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a healthprofessional's authorization token",
+          "required" : true,
+          "type" : "string"
+          } ],
+          "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "templates" ],
+        "summary" : "Add template",
+        "description" : "Add template",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user's authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "title",
+          "in" : "formData",
+          "description" : "title of template",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "description",
+          "in" : "formData",
+          "description" : "description of template",
+          "required" : true,
+          "type" : "string"
+        },{
+          "name" : "thumbImage",
+          "in" : "formData",
+          "description" : "thumbImage to upload",
+          "required" : true,
+          "type" : "file"
+        }, {
+          "name" : "warmup",
+          "in" : "formData",
+          "description" : "warmup videos to be added and upload",
+          "required" : true,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "main",
+          "in" : "formData",
+          "description" : "main videos to be added and upload",
+          "required" : true,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "cooldown",
+          "in" : "formData",
+          "description" : "cooldown videos to be added and upload",
+          "required" : true,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "/templates/paginate" : {
+      "get" : {
+        "tags" : ["templates"],
+        "summary" : "Get paginated templates - healthprofessional",
+        "description" : "This endpoint returns all sessions in the system. We encourage you to use the pagination endpoint for templates.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an healthprofessional's authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "templates/count" : {
+      "get" : {
+        "tags" : [ "templates" ],
+        "summary" : "Get all templates count",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "templates/{id}" : {
+      "get" : {
+        "tags" : [ "templates" ],
+        "summary" : "Get one template by id",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the template to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "templates" ],
+        "summary" : "Update template by id",
+        "description" : "Update templates details",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the template to get",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Updated template object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AddUser"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "templates" ],
+        "summary" : "Delete template with id",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an admin authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the template to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "templates/users" : {
+       "get" : {
+        "tags" : [ "templates" ],
+        "summary" : "Get all templates",
+        "description" : "This endpoint returns all templates in the system. We encourage you to use the pagination endpoint for templates. You will need admin access for this endpoint.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a user authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      },
+       "post" : {
+        "tags" : [ "templates" ],
+        "summary" : "Create a template",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a healthprofessional authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Session"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "templates/users/paginate" : {
+      "get" : {
+        "tags" : [ "templates" ],
+        "summary" : "Get paginated templates.",
+        "description" : "This endpoint returns all templates in the system. We encourage you to use the pagination endpoint for templates.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccessArray"
+            }
+          }
+        }
+      }
+    },
+    "templates/users/{id}" : {
+      "get" : {
+        "tags" : [ "sessions" ],
+        "summary" : "Get all sessions.",
+        "description" : "This endpoint returns all sessions in the system to user. We encourage you to use the pagination endpoint for sessions.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the session to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/TemplatesError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/TemplatesGet"
+            }
+          }
+        }
+      },
+       "put" : {
+        "tags" : [ "
+        templates" ],
+        "summary" : "Update a user 
+        templates",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the template to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Templates"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "templates" ],
+        "summary" : "Delete a user prescription",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the template to delete",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "templates/users/{id}/exercise" : {
+      "put" : {
+        "tags" : [ "templates" ],
+        "summary" : "Add an exercise to template",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a health professional's authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the template to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SessionExercise"
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "templates/users/{id}/exercises" : {
+      "put" : {
+        "tags" : [ "templates" ],
+        "summary" : "Add an exercise to template",
+        "description" : "",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "a health professional's authorization token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id of the template to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/SessionExercise"
+            }
+          }
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Unauthorized Access",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/ServerError"
+            }
+          },
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/PostSuccess"
+            }
+          }
+        }
+      }
+    },
+    "templates/users/count" : {
+       "get" : {
+        "tags" : [ "templates" ],
+        "summary" : "Count all templates.",
+        "description" : "This endpoint returns data containing the count of all user templates.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Auth-Token",
+          "in" : "header",
+          "description" : "an user authorization token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Access Forbiden",
+            "schema" : {
+              "$ref" : "#/definitions/AccessError"
+            }
+          },
+          "500" : {
+            "description" : "Server Error",
+            "schema" : {
+              "$ref" : "#/definitions/TemplatesCountError"
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/TemplatesCount"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Appointment" : {
+      "type" : "object",
+      "properties" : {
+        "_id" : {
+          "type" : "string"
+        },
+        "date" : {
+          "type" : "string"
+        },
+        "time" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        },
+        "patient" : {
+          "type" : "string"
+        },
+        "dateString" : {
+          "type" : "string"
+        },
+        "dateTime" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "integer"
+        },
+        "professional" : {
+          "type" : "string"
+        },
+        "userTimezone" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AppointmentGet" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "boolean",
+          "description" : "Shows status of request"
+        },
+        "data" : {
+          "type" : "object",
+          "properties" : {
+            "appointment" : {
+              "$ref" : "#/definitions/Appointment"
+            }
+          }
+        },
+        "route" : {
+          "type" : "string",
+          "description" : "",
+          "enum" : [ "This is the appointments endpoint" ]
+        }
+      }
+    },
+    "AppointmentsError" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "boolean",
+          "description" : "Shows status of request"
+        },
+        "data" : {
+          "type" : "object",
+          "description" : "",
+          "properties" : { }
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "",
+          "enum" : [ "Server Error" ]
+        },
+        "route" : {
+          "type" : "string",
+          "description" : "",
+          "enum" : [ "This is the appointments endpoint" ]
+        }
+      }
+    },
+    "AppointmentCreate" : {
+      "type" : "object",
+      "properties" : {
+        "timestamp" : {
+          "type" : "integer"
+        },
+        "patient" : {
+          "type" : "string",
+          "description" : "Patient's id"
+        },
+        "type" : {
+          "type" : "string",
+          "default" : "online"
+        },
+        "status" : {
+          "type" : "string",
+          "default" : "pending"
+        },
+        "healthProfessionalType" : {
+          "type" : "string",
+          "description" : "healthProfessionalType's id"
+        }
+      }
+    },
+    "Session" : {
+      "type" : "object",
+      "properties" : {
+        "timestamp" : {
+          "type" : "integer"
+        },
+        "patient" : {
+          "type" : "string",
+          "description" : "Patient's id"
+        },
+        "type" : {
+          "type" : "string",
+          "default" : "online"
+        },
+        "healthProfessional" : {
+          "type" : "string",
+          "description" : "healthProfessional's id"
+        },
+        "healthProfessionalType" : {
+          "type" : "string",
+          "description" : "healthProfessionalType's id"
+        }
+      }
+    },
+    "AppointmentUpdate" : {
+      "type" : "object",
+      "properties" : {
+        "timestamp" : {
+          "type" : "integer"
+        },
+        "healthprofessional" : {
+          "type" : "string",
+          "description" : "Patient's id"
+        },
+        "type" : {
+          "type" : "string",
+          "default" : "online"
+        },
+        "status" : {
+          "type" : "string",
+          "default" : "pending"
+        },
+        "healthProfessionalType" : {
+          "type" : "string",
+          "description" : "healthProfessionalType's id"
+        }
+      }
+    },
+    "LoginResponse" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "boolean",
+          "description" : "Shows status of request"
+        },
+        "token" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "route" : {
+          "type" : "string",
+          "description" : ""
+        }
+      }
+    },
+    "AccessError" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "boolean",
+          "description" : "Shows status of request"
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "",
+          "enum" : [ "Unauthorized Access" ]
+        },
+        "route" : {
+          "type" : "string",
+          "description" : ""
+        }
+      }
+    },
+    "ServerError" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "boolean",
+          "description" : "Shows status of request"
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "",
+          "enum" : [ "Server Error" ]
+        },
+        "route" : {
+          "type" : "string",
+          "description" : ""
+        }
+      }
+    },
+    "AppointmentsCount" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "boolean",
+          "description" : "Shows status of request"
+        },
+        "data" : {
+          "type" : "object",
+          "description" : "",
+          "properties" : {
+            "count" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "route" : {
+          "type" : "string",
+          "description" : ""
+        }
+      }
+    },
+    "AppointmentsCountError" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "boolean",
+          "description" : "Shows status of request"
+        },
+        "data" : {
+          "type" : "object",
+          "description" : "",
+          "properties" : { }
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "",
+          "enum" : [ "Server Error" ]
+        },
+        "route" : {
+          "type" : "string",
+          "description" : "",
+          "enum" : [ "This is the appointments count endpoint" ]
+        }
+      }
+    },
+    "LoginDetails" : {
+      "type" : "object",
+      "properties" : {
+        "email" : {
+          "type" : "string",
+          "description" : "User email"
+        },
+        "password" : {
+          "type" : "string",
+          "description" : "User password"
+        },
+        "remember" : {
+          "type" : "boolean",
+          "description" : "Remember token for longer or not."
+        }
+      }
+    },
+    "AddUser" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "User email"
+        },
+        "role" : {
+          "type" : "string",
+          "description" : "User email",
+          "enum" : [ "ind", "pro", "admin" ]
+        },
+        "dob" : {
+          "type" : "string",
+          "description" : "User date of birth"
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "User status - verified | unverified",
+          "enum" : [ "verified", "unverified" ]
+        },
+        "photoUrl" : {
+          "type" : "string",
+          "description" : "User photoUrl"
+        },
+        "gender" : {
+          "type" : "string",
+          "description" : "User's gender - M | F | O",
+          "enum" : [ "M", "F", "O" ]
+        },
+        "address" : {
+          "type" : "object",
+          "description" : "",
+          "properties" : {
+            "street" : {
+              "type" : "string"
+            },
+            "city" : {
+              "type" : "string"
+            },
+            "country" : {
+              "type" : "string"
+            }
+          }
+        },
+        "preferences" : {
+          "type" : "object",
+          "description" : "",
+          "properties" : {
+            "timezone" : {
+              "type" : "string"
+            },
+            "country" : {
+              "type" : "string"
+            }
+          }
+        },
+        "phone" : {
+          "type" : "object",
+          "description" : "",
+          "properties" : {
+            "dialCode" : {
+              "type" : "string"
+            },
+            "number" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "RegisterDetails" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "User email"
+        },
+        "role" : {
+          "type" : "string",
+          "description" : "User email",
+          "enum" : [ "ind", "pro", "admin" ]
+        },
+        "email" : {
+          "type" : "string",
+          "description" : "User email"
+        },
+        "password" : {
+          "type" : "string",
+          "description" : "User password"
+        },
+        "phone" : {
+          "type" : "object",
+          "description" : "",
+          "properties" : {
+            "dialCode" : {
+              "type" : "string"
+            },
+            "number" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "AdminCreateDetails" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "User email"
+        },
+        "email" : {
+          "type" : "string",
+          "description" : "User email"
+        },
+        "password" : {
+          "type" : "string",
+          "description" : "User password"
+        }
+      }
+    },
+    "AdminUpdateDetails" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "User email"
+        }
+      }
+    },
+    "PostSuccess" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "boolean",
+          "description" : ""
+        },
+        "body" : {
+          "type" : "object",
+          "description" : "Body contains expected response. May be array or object",
+          "properties" : { }
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "Success message"
+        },
+        "route" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PostSuccessArray" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "boolean",
+          "description" : ""
+        },
+        "body" : {
+          "type" : "array",
+          "description" : "Body contains expected response. May be array or object",
+          "items" : {
+            "$ref" : "#/definitions/Object"
+          }
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "Success message"
+        },
+        "route" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Object" : {
+      "type" : "object",
+      "properties" : {
+        "generic" : {
+          "type" : "string",
+          "description" : "Normal JSON Object"
+        }
+      }
+    },
+    "healthprofessionalType" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "healthprofessionalType name"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "healthprofessionalType description"
+        }
+      }
+    },
+    "Diagnosis" : {
+      "type" : "object",
+      "properties" : {
+        "HPC" : {
+          "type" : "string"
+        },
+        "PMHx" : {
+          "type" : "string"
+        },
+        "DHx" : {
+          "type" : "string"
+        },
+        "FSHx" : {
+          "type" : "string"
+        },
+        "OE" : {
+          "type" : "string"
+        },
+        "investigation" : {
+          "type" : "string"
+        },
+        "physicalDiagnosis" : {
+          "type" : "string"
+        },
+        "plan" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SessionExercise" : {
+      "type" : "object",
+      "properties" : {
+        "exercise" : {
+          "type" : "string"
+        },
+        "sets" : {
+          "type" : "integer"
+        },
+        "time" : {
+          "type" : "integer"
+        },
+        "distance" : {
+          "type" : "integer"
+        },
+        "note" : {
+          "type" : "string"
+        },
+        "intensity" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Templates" : {
+      "type" : "object",
+      "properties" : {
+      "_id" : {
+          "type" : "string"
+        },
+        "date" : {
+          "type" : "string"
+        },
+        "time" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "patient" : {
+          "type" : "string",
+          "description" : "Patient's id"
+        },
+        "dateString" : {
+          "type" : "string"
+        },
+        "dateTime" : {
+          "type" : "string"
+        },
+        "healthProfessional" : {
+          "type" : "string",
+          "description" : "healthProfessional's id"
+        },
+        "healthProfessionalType" : {
+          "type" : "string",
+          "description" : "healthProfessionalType's id"
+        }
+      }
+    },
+    "TemplatesError" : {
+       "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "boolean",
+          "description" : "Shows status of request"
+        },
+        "data" : {
+          "type" : "object",
+          "description" : "",
+          "properties" : { }
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "",
+          "enum" : [ "Server Error" ]
+        },
+        "route" : {
+          "type" : "string",
+          "description" : "",
+          "enum" : [ "This is the templates endpoint" ]
+        }
+      }
+    },
+    "TemplatesGet" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "boolean",
+          "description" : "Shows status of request"
+        },
+        "data" : {
+          "type" : "object",
+          "properties" : {
+            "appointment" : {
+              "$ref" : "#/definitions/Templates"
+            }
+          }
+        },
+        "route" : {
+          "type" : "string",
+          "description" : "",
+          "enum" : [ "This is the templates endpoint" ]
+        }
+      }
+    },
+    "TemplatesCreate" : {
+      "type" : "object",
+      "properties" : {
+        "timestamp" : {
+          "type" : "integer"
+        },
+        "patient" : {
+          "type" : "string",
+          "description" : "Patient's id"
+        },
+        "healthProfessionalType" : {
+          "type" : "string",
+          "description" : "healthProfessionalType's id"
+        }
+      }
+    },
+    "TemplatesUpdate" : {
+      "type" : "object",
+      "properties" : {
+        "timestamp" : {
+          "type" : "integer"
+        },
+        "patient" : {
+          "type" : "string",
+          "description" : "Patient's id"
+        },
+        "healthProfessionalType" : {
+          "type" : "string",
+          "description" : "healthProfessionalType's id"
+        }
+      }
+    },
+    "TemplatesCount" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "boolean",
+          "description" : "Shows status of request"
+        },
+        "data" : {
+          "type" : "object",
+          "description" : "",
+          "properties" : {
+            "count" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "route" : {
+          "type" : "string",
+          "description" : ""
+        }
+      }
+    },
+    "TemplatesCountError" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "boolean",
+          "description" : "Shows status of request"
+        },
+         "data" : {
+          "type" : "object",
+          "description" : "",
+          "properties" : { }
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "",
+          "enum" : [ "Server Error" ]
+        },
+        "route" : {
+          "type" : "string",
+          "description" : "",
+          "enum" : [ "This is the prescription template count endpoint" ]
+        }
+      }
+    }
+  }
+}
