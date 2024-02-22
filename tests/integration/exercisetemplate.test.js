@@ -187,7 +187,7 @@ describe("ExerciseTemplate Endpoints /api/templates/", () => {
       },
     };
     const template = await templateService.create(newTemplate);
-    console.log("This is the created template", template);
+    // console.log("This is the created template", template);
     // Perform the API request
     return agent
       .post("/api/templates/")
@@ -195,16 +195,69 @@ describe("ExerciseTemplate Endpoints /api/templates/", () => {
       .set("Auth-Token", admin_token)
       .expect(201)
       .then((res) => {
-        console.log(res.body);
-        console.log(res.body);
-        expect(res.body.title).toMatch(template.title);
-        expect(res.body.description).toMatch(template.description);
-        expect(res.body.warmup).toEqual(template.warmup);
-        expect(res.body.cooldown).toEqual(template.cooldown);
-        expect(res.body.main).toEqual(template.main);
+        // console.log(
+        //   "This is the response",
+        //   res.body.body,
+        //   "This is the new template",
+        //   newTemplate
+        // );
+        // console.log("This is the template", template);
+        expect(res.body.body.title).toMatch(template.title);
+        expect(res.body.body.description).toMatch(template.description);
+
+        // Check warmup, main, and cooldown arrays
+        expect(res.body.body.warmup).toHaveLength(newTemplate.warmup.length);
+        expect(res.body.body.main).toHaveLength(newTemplate.main.length);
+        expect(res.body.body.cooldown).toHaveLength(
+          newTemplate.cooldown.length
+        );
+
+        // Check each item in the warmup, main, and cooldown arrays
+        res.body.body.warmup.forEach((item, index) => {
+          expect(item).toEqual(
+            expect.objectContaining({
+              exercise: newTemplate.warmup[index].exercise,
+              sets: newTemplate.warmup[index].sets,
+              reps: newTemplate.warmup[index].reps,
+              time: newTemplate.warmup[index].time,
+              intensity: newTemplate.warmup[index].intensity,
+            })
+          );
+        });
+
+        res.body.body.main.forEach((item, index) => {
+          expect(item).toEqual(
+            expect.objectContaining({
+              exercise: newTemplate.main[index].exercise,
+              sets: newTemplate.main[index].sets,
+              reps: newTemplate.main[index].reps,
+              time: newTemplate.main[index].time,
+              intensity: newTemplate.main[index].intensity,
+            })
+          );
+        });
+
+        res.body.body.cooldown.forEach((item, index) => {
+          expect(item).toEqual(
+            expect.objectContaining({
+              exercise: newTemplate.cooldown[index].exercise,
+              sets: newTemplate.cooldown[index].sets,
+              reps: newTemplate.cooldown[index].reps,
+              time: newTemplate.cooldown[index].time,
+              intensity: newTemplate.cooldown[index].intensity,
+            })
+          );
+        });
+
+        // expect(res.body.body.warmup).toEqual(
+        //   expect.objectContaining(newTemplate.warmup)
+        // );
+        // expect(res.body.body.cooldown).toEqual(newTemplate.cooldown);
+        // expect(res.body.body.main).toEqual(newTemplate.main);
         // Add more assertions based on your model structure
       });
   });
+
   // test('GET /:id', async () => {
   //   // Assuming you have a function to create an ExerciseTemplate
   //   const tempBodyPart = { name: 'part1', description: 'desc' };
