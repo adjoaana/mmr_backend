@@ -24,7 +24,7 @@ router.post(
     config.ADMIN_ROLE,
     config.HEALTH_PROFESSIONAL_ROLE,
   ]),
-  // TemplateMiddleware.create,
+  // TemplateMiddleware.create, //for validation basically
   controller.add
 );
 
