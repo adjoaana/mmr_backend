@@ -28,4 +28,44 @@ router.post(
   controller.add
 );
 
+/* 
+@route - /api/templates/:id 
+@method - GET
+@desc - Get details of one exercise template
+*/
+router.get(
+  "/:id",
+  AuthenticationMiddleware.allowed_users([
+    config.ADMIN_ROLE,
+    config.HEALTH_PROFESSIONAL_ROLE,
+  ]),
+  controller.getOne
+);
+/* 
+@route - /api/templates/:id 
+@method - PUT
+@desc - Update details of one exercise template
+*/
+router.put(
+  "/:id",
+  AuthenticationMiddleware.allowed_users([
+    config.ADMIN_ROLE,
+    config.HEALTH_PROFESSIONAL_ROLE,
+  ]),
+  controller.updateOneUserTemplate
+);
+/* 
+@route - /api/templates/:id 
+@method - DELETE
+@desc - Delete existing exercise template
+*/
+router.delete(
+  "/:id",
+  AuthenticationMiddleware.allowed_users([
+    config.ADMIN_ROLE,
+    config.HEALTH_PROFESSIONAL_ROLE,
+  ]),
+  controller.deleteOneUserTemplate
+);
+
 module.exports = router;

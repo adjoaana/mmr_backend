@@ -1,5 +1,13 @@
 const mongoose = require("mongoose");
 const config = require("../config");
+
+const convertStringNullToNull = (value) => {
+  if (value === "null") {
+    return null;
+  }
+  return value;
+};
+
 const options = {
   title: {
     type: String,
@@ -45,11 +53,13 @@ const options = {
         type: Number,
         min: 0,
         description: "must be a number (seconds) if it exists",
+        set: convertStringNullToNull,
       },
       distance: {
         type: Number,
         min: 0,
         description: "must be a number if it exists",
+        set: convertStringNullToNull,
       },
       intensity: {
         type: String,
@@ -91,11 +101,13 @@ const options = {
         type: Number,
         min: 0,
         description: "must be a number (seconds) if it exists",
+        set: convertStringNullToNull,
       },
       distance: {
         type: Number,
         min: 0,
         description: "must be a number if it exists",
+        set: convertStringNullToNull,
       },
       intensity: {
         type: String,
@@ -137,11 +149,13 @@ const options = {
         type: Number,
         min: 0,
         description: "must be a number (seconds) if it exists",
+        set: convertStringNullToNull,
       },
       distance: {
         type: Number,
         min: 0,
         description: "must be a number if it exists",
+        set: convertStringNullToNull,
       },
       intensity: {
         type: String,

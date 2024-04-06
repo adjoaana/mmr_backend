@@ -11,9 +11,30 @@ class TemplateService extends Service {
     const response = await this.Model.findOne({ _id })
       .populate("patient", "name email creator")
       .populate("healthProfessionalType", "name")
-      .populate("warmup")
-      .populate("main")
-      .populate("cooldown")
+      .populate({
+        path: "warmup",
+        populate: {
+          path: "exercise",
+          model: "Exercises",
+          select: "title",
+        },
+      })
+      .populate({
+        path: "main",
+        populate: {
+          path: "exercise",
+          model: "Exercises",
+          select: "title",
+        },
+      })
+      .populate({
+        path: "cooldown",
+        populate: {
+          path: "exercise",
+          model: "Exercises",
+          select: "title",
+        },
+      })
       .populate("healthProfessional", "name email creator");
     return response;
   };
@@ -29,12 +50,34 @@ class TemplateService extends Service {
     return response;
   };
   getManyByFilter = async (filter) => {
+    console.log("Getting all templates");
     const response = await this.Model.find(filter, this.selection)
       .populate("patient", "name email creator")
       .populate("healthProfessionalType", "name")
-      .populate("warmup")
-      .populate("main")
-      .populate("cooldown")
+      .populate({
+        path: "warmup",
+        populate: {
+          path: "exercise",
+          model: "Exercises",
+          select: "title",
+        },
+      })
+      .populate({
+        path: "main",
+        populate: {
+          path: "exercise",
+          model: "Exercises",
+          select: "title",
+        },
+      })
+      .populate({
+        path: "cooldown",
+        populate: {
+          path: "exercise",
+          model: "Exercises",
+          select: "title",
+        },
+      })
       .populate("healthProfessional", "name email creator")
       .sort(this.sort);
     return response;
@@ -177,7 +220,11 @@ class TemplateService extends Service {
   deleteOneUserTemplate = async (user_id, template_id) => {
     const result = await this.Model.deleteOne({
       _id: template_id,
-      $or: [{ patient: user_id }, { healthProfessional: user_id }],
+      $or: [
+        { patient: user_id },
+        { healthProfessional: user_id },
+        { "creator.admin": user_id },
+      ],
     });
 
     return result.deletedCount ?? 0;
@@ -187,7 +234,11 @@ class TemplateService extends Service {
     const response = await this.Model.findOneAndUpdate(
       {
         _id,
-        $or: [{ patient: user_id }, { healthProfessional: user_id }],
+        $or: [
+          { patient: user_id },
+          { healthProfessional: user_id },
+          { "creator.admin": user_id },
+        ],
       },
       data,
       { new: true, useFindAndModify: false, fields: this.selection }
