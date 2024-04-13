@@ -36,6 +36,8 @@ class TemplateController extends Controller {
         warmup: response.warmup,
         main: response.main,
         cooldown: response.cooldown,
+        creator: response.creator,
+        lastEditor: response.lastEditor,
       };
       res.status(200).json({
         status: 200,
