@@ -3750,7 +3750,719 @@
           }
         }
       }
-    }
+    },
+    "/templates": {
+      "get" : {
+        "tags": [ "templates" ],
+        "summary" : "Get all templates",
+        "description": "This endpoint returns all sessions in the system. We encourage you to use the pagination endpoint for sessions. You will need healthprofessional access for this endpoint.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "a healthprofessional's authorization token",
+            "required" : true,
+            "type" : "string"
+            } ],
+            "responses" : {
+            "403" : {
+              "description" : "Unauthorized Access",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/ServerError"
+              }
+            },
+            "200" : {
+              "description" : "Success response",
+              "schema" : {
+                "$ref" : "#/definitions/PostSuccessArray"
+              }
+            }
+          }
+        },
+        "post" : {
+          "tags" : [ "templates" ],
+          "summary" : "Add template",
+          "description" : "Add template",
+          "consumes" : [ "multipart/form-data" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "an user's authorization token",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "name" : "title",
+            "in" : "formData",
+            "description" : "title of template",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "name" : "description",
+            "in" : "formData",
+            "description" : "description of template",
+            "required" : true,
+            "type" : "string"
+          },{
+            "name" : "thumbImage",
+            "in" : "formData",
+            "description" : "thumbImage to upload",
+            "required" : true,
+            "type" : "file"
+          }, {
+            "name" : "warmup",
+            "in" : "formData",
+            "description" : "warmup videos to be added and upload",
+            "required" : true,
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }, {
+            "name" : "main",
+            "in" : "formData",
+            "description" : "main videos to be added and upload",
+            "required" : true,
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }, {
+            "name" : "cooldown",
+            "in" : "formData",
+            "description" : "cooldown videos to be added and upload",
+            "required" : true,
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Unauthorized Access",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/ServerError"
+              }
+            },
+            "200" : {
+              "description" : "Success response",
+              "schema" : {
+                "$ref" : "#/definitions/PostSuccess"
+              }
+            }
+          }
+        }
+      },
+      "/templates/paginate" : {
+        "get" : {
+          "tags" : ["templates"],
+          "summary" : "Get paginated templates - healthprofessional",
+          "description" : "This endpoint returns all sessions in the system. We encourage you to use the pagination endpoint for templates.",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "an healthprofessional's authorization token",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "name" : "page",
+            "in" : "query",
+            "required" : false,
+            "type" : "integer"
+          }, {
+            "name" : "limit",
+            "in" : "query",
+            "required" : false,
+            "type" : "integer"
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Access Forbiden",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/ServerError"
+              }
+            },
+            "200" : {
+              "description" : "OK",
+              "schema" : {
+                "$ref" : "#/definitions/PostSuccessArray"
+              }
+            }
+          }
+        }
+      },
+      "templates/count" : {
+        "get" : {
+          "tags" : [ "templates" ],
+          "summary" : "Get all templates count",
+          "description" : "",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "a user authorization token",
+            "required" : true,
+            "type" : "string"
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Unauthorized Access",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/ServerError"
+              }
+            },
+            "200" : {
+              "description" : "Success response",
+              "schema" : {
+                "$ref" : "#/definitions/PostSuccessArray"
+              }
+            }
+          }
+        }
+      },
+      "templates/{id}" : {
+        "get" : {
+          "tags" : [ "templates" ],
+          "summary" : "Get one template by id",
+          "description" : "",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "a user authorization token",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "name" : "id",
+            "in" : "path",
+            "description" : "id of the template to get",
+            "required" : true,
+            "type" : "string"
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Unauthorized Access",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/ServerError"
+              }
+            },
+            "200" : {
+              "description" : "Success response",
+              "schema" : {
+                "$ref" : "#/definitions/PostSuccess"
+              }
+            }
+          }
+        },
+        "put" : {
+          "tags" : [ "templates" ],
+          "summary" : "Update template by id",
+          "description" : "Update templates details",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "an admin authorization token",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "name" : "id",
+            "in" : "path",
+            "description" : "id of the template to get",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "in" : "body",
+            "name" : "body",
+            "description" : "Updated template object",
+            "required" : true,
+            "schema" : {
+              "$ref" : "#/definitions/AddUser"
+            }
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Unauthorized Access",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/ServerError"
+              }
+            },
+            "200" : {
+              "description" : "Success response",
+              "schema" : {
+                "$ref" : "#/definitions/PostSuccess"
+              }
+            }
+          }
+        },
+        "delete" : {
+          "tags" : [ "templates" ],
+          "summary" : "Delete template with id",
+          "description" : "",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "an admin authorization token",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "name" : "id",
+            "in" : "path",
+            "description" : "id of the template to get",
+            "required" : true,
+            "type" : "string"
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Unauthorized Access",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/ServerError"
+              }
+            },
+            "200" : {
+              "description" : "Success response",
+              "schema" : {
+                "$ref" : "#/definitions/PostSuccess"
+              }
+            }
+          }
+        }
+      },
+      "templates/users" : {
+         "get" : {
+          "tags" : [ "templates" ],
+          "summary" : "Get all templates",
+          "description" : "This endpoint returns all templates in the system. We encourage you to use the pagination endpoint for templates. You will need admin access for this endpoint.",
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "a user authorization token",
+            "required" : true,
+            "type" : "string"
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Access Forbiden",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/ServerError"
+              }
+            },
+            "200" : {
+              "description" : "OK",
+              "schema" : {
+                "$ref" : "#/definitions/PostSuccessArray"
+              }
+            }
+          }
+        },
+         "post" : {
+          "tags" : [ "templates" ],
+          "summary" : "Create a template",
+          "description" : "",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "a healthprofessional authorization token",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "in" : "body",
+            "name" : "body",
+            "required" : true,
+            "schema" : {
+              "$ref" : "#/definitions/Session"
+            }
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Unauthorized Access",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/ServerError"
+              }
+            },
+            "200" : {
+              "description" : "Success response",
+              "schema" : {
+                "$ref" : "#/definitions/PostSuccess"
+              }
+            }
+          }
+        }
+      },
+      "templates/users/paginate" : {
+        "get" : {
+          "tags" : [ "templates" ],
+          "summary" : "Get paginated templates.",
+          "description" : "This endpoint returns all templates in the system. We encourage you to use the pagination endpoint for templates.",
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "an user authorization token",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "name" : "page",
+            "in" : "query",
+            "required" : false,
+            "type" : "integer"
+          }, {
+            "name" : "limit",
+            "in" : "query",
+            "required" : false,
+            "type" : "integer"
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Access Forbiden",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/ServerError"
+              }
+            },
+            "200" : {
+              "description" : "OK",
+              "schema" : {
+                "$ref" : "#/definitions/PostSuccessArray"
+              }
+            }
+          }
+        }
+      },
+      "templates/users/{id}" : {
+        "get" : {
+          "tags" : [ "sessions" ],
+          "summary" : "Get all sessions.",
+          "description" : "This endpoint returns all sessions in the system to user. We encourage you to use the pagination endpoint for sessions.",
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "an user authorization token",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "name" : "id",
+            "in" : "path",
+            "description" : "id of the session to get",
+            "required" : true,
+            "type" : "string"
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Access Forbiden",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/TemplatesError"
+              }
+            },
+            "200" : {
+              "description" : "OK",
+              "schema" : {
+                "$ref" : "#/definitions/TemplatesGet"
+              }
+            }
+          }
+        },
+         "put" : {
+          "tags" : [ "templates" ],
+          "summary" : "Update a user templates",
+          "description" : "",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "an user authorization token",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "name" : "id",
+            "in" : "path",
+            "description" : "id of the template to update",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "in" : "body",
+            "name" : "body",
+            "required" : true,
+            "schema" : {
+              "$ref" : "#/definitions/Templates"
+            }
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Unauthorized Access",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/ServerError"
+              }
+            },
+            "200" : {
+              "description" : "Success response",
+              "schema" : {
+                "$ref" : "#/definitions/PostSuccess"
+              }
+            }
+          }
+        },
+        "delete" : {
+          "tags" : [ "templates" ],
+          "summary" : "Delete a user prescription",
+          "description" : "",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "an user authorization token",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "name" : "id",
+            "in" : "path",
+            "description" : "id of the template to delete",
+            "required" : true,
+            "type" : "string"
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Unauthorized Access",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/ServerError"
+              }
+            },
+            "200" : {
+              "description" : "Success response",
+              "schema" : {
+                "$ref" : "#/definitions/PostSuccess"
+              }
+            }
+          }
+        }
+      },
+      "templates/users/{id}/exercise" : {
+        "put" : {
+          "tags" : [ "templates" ],
+          "summary" : "Add an exercise to template",
+          "description" : "",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "a health professional's authorization token",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "name" : "id",
+            "in" : "path",
+            "description" : "id of the template to update",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "in" : "body",
+            "name" : "body",
+            "required" : true,
+            "schema" : {
+              "$ref" : "#/definitions/SessionExercise"
+            }
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Unauthorized Access",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/ServerError"
+              }
+            },
+            "200" : {
+              "description" : "Success response",
+              "schema" : {
+                "$ref" : "#/definitions/PostSuccess"
+              }
+            }
+          }
+        }
+      },
+      "templates/users/{id}/exercises" : {
+        "put" : {
+          "tags" : [ "templates" ],
+          "summary" : "Add an exercise to template",
+          "description" : "",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "a health professional's authorization token",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "name" : "id",
+            "in" : "path",
+            "description" : "id of the template to update",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "in" : "body",
+            "name" : "body",
+            "required" : true,
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/SessionExercise"
+              }
+            }
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Unauthorized Access",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/ServerError"
+              }
+            },
+            "200" : {
+              "description" : "Success response",
+              "schema" : {
+                "$ref" : "#/definitions/PostSuccess"
+              }
+            }
+          }
+        }
+      },
+      "templates/users/count" : {
+         "get" : {
+          "tags" : [ "templates" ],
+          "summary" : "Count all templates.",
+          "description" : "This endpoint returns data containing the count of all user templates.",
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Auth-Token",
+            "in" : "header",
+            "description" : "an user authorization token",
+            "required" : true,
+            "type" : "string"
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "Access Forbiden",
+              "schema" : {
+                "$ref" : "#/definitions/AccessError"
+              }
+            },
+            "500" : {
+              "description" : "Server Error",
+              "schema" : {
+                "$ref" : "#/definitions/TemplatesCountError"
+              }
+            },
+            "200" : {
+              "description" : "OK",
+              "schema" : {
+                "$ref" : "#/definitions/TemplatesCount"
+              }
+            }
+          }
+        }
+      }
   },
   "definitions": {
     "Appointment": {
