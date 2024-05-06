@@ -18,6 +18,7 @@ const PaymentRoute = require("./routes/Payment.route");
 const ExerciseRoute = require("./routes/Exercise.route");
 const TemplateRoute = require("./routes/Template.route");
 const AppointmentRoute = require("./routes/Appointment.route");
+const PrescriptionRoute = require("./routes/Prescription.route");
 const SecurityManager = require("./controllers/SecurityManager.controller");
 const bodyParser = require("body-parser");
 const config = require("./config");
@@ -93,6 +94,7 @@ app.use("/api/admins", AdminRoute);
 app.use("/api/settings", SettingsRoute);
 app.use("/api/storage/", StorageRoute);
 app.use("/api/templates", TemplateRoute);
+app.use("/api/prescriptions", PrescriptionRoute);
 
 app.get("/file/:key", async (req, res) => {
   const { key } = req.params;

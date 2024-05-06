@@ -64,7 +64,6 @@ class ExerciseController extends Controller {
     }
   };
   get = async (req, res) => {
-    console.log("IN hereee");
     if (this.respondValidationError(req, res)) return;
     try {
       let { query } = req.query;
