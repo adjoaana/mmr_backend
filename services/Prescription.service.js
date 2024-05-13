@@ -22,6 +22,8 @@ class PrescriptionService extends Service {
     templateID,
     healthProfessionalID,
   }) => {
+    // check if prescription exists and patient has not completed the videos, then return a response that shows exisiting prescription (filters)
+    // else proceed like normal
     const template = await TemplateModel.findOne({ _id: templateID });
     const newPrescription = new Prescription({
       patientID,
@@ -44,7 +46,7 @@ class PrescriptionService extends Service {
   }
 
   async getPrescriptionDetail(prescriptionID) {
-    return await Prescription.findById(prescriptionID);
+    return await Prescription.findById(prescriptionID); //make sure it is specific to the login user or hp as well
   }
 }
 

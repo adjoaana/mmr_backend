@@ -1,11 +1,14 @@
 "use strict";
 const config = require("../config");
 const PrescriptionService = require("../services/Prescription.service");
+const EmailService = require("../services/Email.service");
+const PatientService = require("../services/User.service");
 const Controller = require("./Controller");
 
 class PrescriptionController extends Controller {
   constructor() {
     super(new PrescriptionService(), "prescriptions route");
+    this.emailService = new EmailService();
   }
 
   getAllPrescriptions = async (req, res) => {
@@ -25,13 +28,33 @@ class PrescriptionController extends Controller {
   createPrescription = async (req, res) => {
     if (this.respondValidationError(req, res)) return;
     try {
-      const { patientID, templateID } = req.body;
+      const {
+        patientID,
+        templateID,
+        emailHTML = "This is a test email",
+      } = req.body;
       const healthProfessionalID = req.req_user._id;
+      const patientData = await new PatientService().getOne(patientID);
       const newPrescription = await this.service.createPrescription({
         patientID,
         templateID,
         healthProfessionalID,
       });
+
+      // console.log(emailHTML);
+
+      const createdEmail = await this.emailService.scheduleEmail({
+        receiver: patientData?.email,
+        receipientName: patientData?.name,
+        subject: "Test email",
+        message: emailHTML,
+        dateTime: Date.now(),
+      });
+
+      const { _id: id } = createdEmail;
+
+      const sentEmailStatus = await this.emailService.sendSelectedEmail(id);
+      // console.log(sentEmailStatus);
       res.status(201).json({ status: 201, body: newPrescription });
       return null;
     } catch (error) {
