@@ -2,6 +2,7 @@ require("dotenv").config();
 const TemplateMiddleware = require("../middlewares/Template.middleware");
 const AuthenticationMiddleware = require("../middlewares/Authentication.middleware");
 const TemplateController = require("../controllers/Template.controller");
+const storageManager = require("../utils/Storage.manager");
 const config = require("../config");
 const express = require("express");
 
@@ -15,7 +16,7 @@ router.get(
     config.ADMIN_ROLE,
     config.HEALTH_PROFESSIONAL_ROLE,
   ]),
-  controller.get
+  controller.getUserTemplates
 );
 
 router.post(
@@ -24,8 +25,9 @@ router.post(
     config.ADMIN_ROLE,
     config.HEALTH_PROFESSIONAL_ROLE,
   ]),
+  storageManager.MUpload.single("file"),
   // TemplateMiddleware.create, //for validation basically
-  controller.add
+  controller.addUserTemplates
 );
 
 /* 
@@ -52,6 +54,7 @@ router.put(
     config.ADMIN_ROLE,
     config.HEALTH_PROFESSIONAL_ROLE,
   ]),
+  storageManager.MUpload.single("file"),
   controller.updateOneUserTemplate
 );
 /* 

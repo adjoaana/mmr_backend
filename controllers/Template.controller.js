@@ -1,6 +1,7 @@
 "use strict";
 const config = require("../config");
 const TemplateService = require("../services/Template.service");
+const Templates = require("../models/Template.model");
 const StorageManager = require("../utils/Storage.manager");
 const Controller = require("./Controller");
 
@@ -54,15 +55,24 @@ class TemplateController extends Controller {
     if (this.respondValidationError(req, res)) return;
     try {
       const body = req.body;
-      if (req.req_user.role === config.HEALTH_PROFESSIONAL_ROLE) {
-        (body.healthProfessional = req.req_user), _id;
-      } else {
-        if (req.req_user.creator.type === config.HEALTH_PROFESSIONAL_ROLE) {
-          body.healthProfessional = req.req_user.creator.id;
-        }
-        body.patient = req.req_user._id;
-      }
-      const response = await this.service.create(body);
+      const thumbImageFile = req.file;
+      const folderPath = "templates/thumbnails/";
+      // because of the js formData object
+      let parsedBody = JSON.parse(body.data);
+
+      // console.log(parsedBody);
+
+      //save file to AWS S3 bucket
+      const storageResponse = await this.storageManager.upload(
+        thumbImageFile,
+        folderPath
+      );
+      parsedBody = {
+        ...parsedBody,
+        thumbImage: { key: storageResponse.Key },
+      };
+
+      const response = await this.service.create(parsedBody);
       res.status(201).json({
         status: 201,
         body: response,
@@ -77,13 +87,11 @@ class TemplateController extends Controller {
   getUserTemplates = async (req, res) => {
     if (this.respondValidationError(req, res)) return;
     try {
-      const user_id = req.req_user._id;
-      const response = await this.service.getUserTemplates(user_id);
+      // const user_id = req.req_user._id;
+      const response = await this.service.getAll();
       res.status(200).json({
         status: 200,
-        body: {
-          count: response,
-        },
+        body: response,
         route: this.routeString,
       });
       return null;
@@ -485,12 +493,32 @@ class TemplateController extends Controller {
         return this.respondParamsError(res);
       }
       const body = req.body;
+      const template = await Templates.findById(id);
+      const thumbImageFile = req.file;
+      const folderPath = "templates/thumbnails/";
+      // because of the js formData object
+      let parsedBody = JSON.parse(body.data);
+
+      if (thumbImageFile) {
+        // delete previous thumbnail from AWS s3
+        await this.storageManager.deleteFile(template.thumbImage.key);
+        //save file to AWS S3 bucket if the user updated the thumbnail
+        const storageResponse = await this.storageManager.upload(
+          thumbImageFile,
+          folderPath
+        );
+        parsedBody = {
+          ...parsedBody,
+          thumbImage: { key: storageResponse.Key },
+        };
+      }
       const user_id = req.req_user._id;
       const response = await this.service.updateOneUserTemplate(
         user_id,
         id,
-        body
+        parsedBody
       );
+      console.log(response);
       res.status(200).json({
         status: 200,
         body: response,
@@ -510,6 +538,12 @@ class TemplateController extends Controller {
         return this.respondParamsError(res);
       }
       const user_id = req.req_user._id;
+
+      // get template
+      const template = await Templates.findById(id);
+
+      // delete file from AWS s3
+      await this.storageManager.deleteFile(template.thumbImage.key);
       const response = await this.service.deleteOneUserTemplate(user_id, id);
       res.status(200).json({
         status: 200,

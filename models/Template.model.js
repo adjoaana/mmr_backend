@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const config = require("../config");
+const StorageManager = require("../utils/Storage.manager");
 
 const convertStringNullToNull = (value) => {
   if (value === "null") {
@@ -30,7 +31,7 @@ const options = {
       type: String,
       required: true,
       description: "must be a String",
-      default: "default-exercise-template.png",
+      default: "templates/thumbnails/default-exercise-template.png",
     },
   },
   warmup: [
@@ -267,6 +268,16 @@ const options = {
   },
 };
 
-const TemplatesSchema = new mongoose.Schema(options, { timestamps: true });
+const TemplatesSchema = new mongoose.Schema(options, {
+  timestamps: true,
+  methods: {
+    async generateThumbnailURL(cb) {
+      const thumbKey = this.thumbImage.key;
+
+      const url = await new StorageManager().getFileUrl(thumbKey);
+      return url;
+    },
+  },
+});
 
 module.exports = mongoose.model("Templates", TemplatesSchema);

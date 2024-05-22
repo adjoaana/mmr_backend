@@ -80,7 +80,19 @@ class TemplateService extends Service {
       })
       .populate("healthProfessional", "name email creator")
       .sort(this.sort);
-    return response;
+
+    // response with thumbImage URL generated.
+
+    const formattedResponse = [];
+    for (const template of response) {
+      const url = await template.generateThumbnailURL();
+      // console.log(url);
+      template.thumbImage.url = url;
+      // console.log("Editied template obj
+      formattedResponse.push(template);
+    }
+
+    return formattedResponse;
   };
   getPage = async (page, limit = 10) => {
     if (page < 0 || limit < 0) return [];
@@ -162,13 +174,34 @@ class TemplateService extends Service {
   };
   getUserTemplates = async (user_id) => {
     const response = await this.Model.find({
-      $or: [{ patient: user_id }, { healthProfessional: user_id }],
+      $or: [{ "creator.admin": user_id }, { healthProfessional: user_id }],
     })
       .populate("patient", "name email creator")
       .populate("healthProfessionalType", "name")
-      .populate("warmup")
-      .populate("main")
-      .populate("cooldown")
+      .populate({
+        path: "warmup",
+        populate: {
+          path: "exercise",
+          model: "Exercises",
+          select: "title",
+        },
+      })
+      .populate({
+        path: "main",
+        populate: {
+          path: "exercise",
+          model: "Exercises",
+          select: "title",
+        },
+      })
+      .populate({
+        path: "cooldown",
+        populate: {
+          path: "exercise",
+          model: "Exercises",
+          select: "title",
+        },
+      })
       .populate("healthProfessional", "name email creator")
       .sort(this.sort);
     return response;
@@ -224,6 +257,7 @@ class TemplateService extends Service {
         { patient: user_id },
         { healthProfessional: user_id },
         { "creator.admin": user_id },
+        { "creator.user": user_id },
       ],
     });
 
@@ -231,6 +265,9 @@ class TemplateService extends Service {
   };
 
   updateOneUserTemplate = async (user_id, _id, data) => {
+    console.log(data);
+    console.log(_id);
+    console.log(user_id);
     const response = await this.Model.findOneAndUpdate(
       {
         _id,
@@ -238,6 +275,7 @@ class TemplateService extends Service {
           { patient: user_id },
           { healthProfessional: user_id },
           { "creator.admin": user_id },
+          { "creator.user": user_id },
         ],
       },
       data,
