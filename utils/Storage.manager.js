@@ -2,15 +2,14 @@ const fs = require("fs");
 const AWS = require("aws-sdk");
 const config = require("../config");
 const multer = require("multer");
+const { Readable } = require("stream");
 
 class StorageManager {
-  static storage = multer.memoryStorage({
-    destination: function (req, file, cb) {
-      cb(null, ""); // No destination needed as files are uploaded directly to S3
-    },
-  });
-
-  static MUpload = multer({ storage: StorageManager.storage });
+  // static storage = multer.memoryStorage({
+  //   destination: function (req, file, cb) {
+  //     cb(null, ""); // No destination needed as files are uploaded directly to S3
+  //   },
+  // });
 
   constructor() {
     this.s3 = new AWS.S3({
@@ -18,18 +17,23 @@ class StorageManager {
       accessKeyId: config.AWS_ACCESS_KEY_ID,
       secretAccessKey: config.AWS_SECRET_ACCESS_KEY,
     });
+    this.MUpload = multer({ storage: multer.memoryStorage() });
   }
 
   upload = async (file, folder_path = "") => {
+    let fileStream = Readable.from(file.buffer);
+
     // using multer memory storage
     const uploadParams = {
       Bucket: config.AWS_S3_BUCKET_NAME,
-      Body: file.buffer,
+      Body: fileStream,
+      ContentType: file.mimetype,
       Key:
         folder_path +
         (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "dev"
           ? "test_"
           : "") +
+        `${Date.now()}_` +
         file.originalname,
     };
     const response = await this.s3.upload(uploadParams).promise();

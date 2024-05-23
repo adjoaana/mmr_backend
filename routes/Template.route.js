@@ -25,7 +25,7 @@ router.post(
     config.ADMIN_ROLE,
     config.HEALTH_PROFESSIONAL_ROLE,
   ]),
-  storageManager.MUpload.single("file"),
+  new storageManager().MUpload.single("file"),
   // TemplateMiddleware.create, //for validation basically
   controller.addUserTemplates
 );
@@ -54,7 +54,7 @@ router.put(
     config.ADMIN_ROLE,
     config.HEALTH_PROFESSIONAL_ROLE,
   ]),
-  storageManager.MUpload.single("file"),
+  new storageManager().MUpload.single("file"),
   controller.updateOneUserTemplate
 );
 /* 

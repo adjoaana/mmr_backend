@@ -7,6 +7,9 @@ provider:
   stage: prod
   region: us-east-1
   memorySize: 128
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
 functions:
   app:
     handler: app.handler
